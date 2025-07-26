@@ -54,7 +54,7 @@ def print_board(playing_board, score): # Display the game board
                 print(str(cell).center(cell_width) + '|', end = '')
         print()
         print(horizontal_line)
-    print(f'\nСчет: {score}\n')
+    print(f'\nScore: {score}\n')
 
 def checking_positions(positions, playing_board): # Check if cells are occupied
     free_positions = []
@@ -316,7 +316,7 @@ while victory == None:
 
 print_board(playing_board, score)
 if victory == True:
-    print('Вы победили! 2048 собрано!')
+    print('You win! 2048 tile reached!')
 
 elif victory == False:
-    print('Возможных ходов не осталось. Вы проиграли!')
+    print('No more possible moves. You lose!')
