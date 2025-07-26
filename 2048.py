@@ -297,7 +297,7 @@ def defeat_check(playing_board): # Check for possible moves when the board is fu
                     return                                   
     return False
 
-
+# Main code
 while victory == None:
     move += 1
     victory = victory_check(playing_board)
