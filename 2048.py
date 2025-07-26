@@ -31,18 +31,18 @@ buttons = {'w': 'up',
           'd': 'right'}
 
 victory = None
-movement = True # Првоверка был ли сделан ход
+movement = True # Check if a move was made
 move = 0
 score = 0
 
-def clear_terminal(): # Очистка терминала
+def clear_terminal(): # Clear the terminal
     os_name = 'cls' if os.name == 'nt' else 'clear'
     os.system(os_name)
 
-def print_board(playing_board, score): # Вывод игрового поля
+def print_board(playing_board, score): # Display the game board
     cell_width = 6
     horizontal_line = '+' + ('-' * cell_width + '+') * 4
-    clear_terminal() # Очистка терминала перед выводом измененного игрового поля
+    clear_terminal() # Clear the terminal before  displaying the updated game board
 
     print(horizontal_line)
     for row in playing_board:
@@ -56,7 +56,7 @@ def print_board(playing_board, score): # Вывод игрового поля
         print(horizontal_line)
     print(f'\nСчет: {score}\n')
 
-def checking_positions(positions, playing_board): # Проверка ячеек на занятость
+def checking_positions(positions, playing_board): # Check if cells are occupied
     free_positions = []
     key = 0
     for y in range(4):
@@ -69,7 +69,7 @@ def checking_positions(positions, playing_board): # Проверка ячеек 
                 positions[key][1] = 'busy'
     return free_positions
 
-def filling_in_empty_cells(free_positions, positions, move): # Добавление новых цифр в пустые клетки
+def filling_in_empty_cells(free_positions, positions, move): # Add new numbers to empty cells
     if move == 1:
         cells = random.sample(free_positions, 2)
     else:
@@ -89,9 +89,9 @@ def change_on_the_board(victory):
         filling_in_empty_cells(free_positions, positions, move)
 
 
-# Функции управления
+# Control functions
 
-# Движение вверх
+# Move up
 def up(playing_board, movement):
     global score
     while True:
@@ -129,7 +129,7 @@ def up(playing_board, movement):
             
             return columns, movement
 
-# Движение влево
+# Move left
 def left(playing_board, movement):
     global score
     while True:
@@ -154,7 +154,7 @@ def left(playing_board, movement):
                         movement = True
             return movement
 
-# Движение вниз
+# Move down
 def down(playing_board, movement):
     global score
     while True:
@@ -192,7 +192,7 @@ def down(playing_board, movement):
 
             return columns, movement
 
-# Движение вправо
+# Move right
 def right(playing_board, movement):
     global score
     while True:
@@ -217,7 +217,7 @@ def right(playing_board, movement):
                         movement = True
             return movement
 
-def move_on_the_board(buttons): # Функция движения
+def move_on_the_board(buttons): # Movement function
     global playing_board, movement 
     while True:
         try:
@@ -246,15 +246,15 @@ def move_on_the_board(buttons): # Функция движения
 
             break
 
-def victory_check(playing_board): # Проверка наличия 2048 на поле
+def victory_check(playing_board): # Check if 2048 is on the board
     positions_key = list(positions.keys())
     for row in playing_board:
         if 2048 in row:
             return True
 
-def defeat_check(playing_board): # Поиск возможных ходов при полностью заполненом поле
+def defeat_check(playing_board): # Check for possible moves when the board is full
     for x in range(0, 4):
-        for y in range(0, 4):  # Первая версия поиска
+        for y in range(0, 4):  # First version of the check
             # if x == 0:
             #     if y == 0:
             #         if playing_board[x][y] == playing_board[x][y + 1] or playing_board[x][y] == playing_board[x + 1][y]:
@@ -288,7 +288,7 @@ def defeat_check(playing_board): # Поиск возможных ходов пр
             #         if playing_board[x][y] == playing_board[x][y - 1] or playing_board[x][y] == playing_board[x - 1][y] or playing_board[x][y] == playing_board[x][y + 1] or playing_board[x][y] == playing_board[x + 1][y]:
             #             return
             
-            # Вторая версия поиска
+            # Second version of the check
             if x < 3:
                 if playing_board[x][y] == playing_board[x + 1][y]:
                     return
